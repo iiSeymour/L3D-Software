@@ -59,6 +59,11 @@ void initSparkVariables()
 void updateNetworkInfo()
 {
     IPAddress myIp = WiFi.localIP();
+    while(myIp[0] == 0) {
+      myIp = WiFi.localIP();
+      Particle.process();
+    }
+    
     sprintf(localIP, "%d.%d.%d.%d", myIp[0], myIp[1], myIp[2], myIp[3]);
     byte macAddr[6];
     WiFi.macAddress(macAddr);
